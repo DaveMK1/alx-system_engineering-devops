@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Outputs files in directory with name text after first dash only
+
+list=$(ls)
+for i in $list; do
+  echo "$i" | cut -d '-' -f2
+done
