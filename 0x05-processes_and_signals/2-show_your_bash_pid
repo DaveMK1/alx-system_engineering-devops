@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#Displays bash lines in ps -A uf
+#shellcheck disable=SC2009
+
+ps -aux | grep bash
