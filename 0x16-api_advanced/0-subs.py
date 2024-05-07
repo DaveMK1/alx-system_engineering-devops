@@ -1,15 +1,28 @@
 #!/usr/bin/python3
-""" Script that queries subscribers on a given Reddit subreddit """
+"""
+Function that queries the Reddit API
+"""
+
 import requests
-import sys
 
 
 def number_of_subscribers(subreddit):
-    """  Return the number of subscribers on a given subreddit"""
-    headers = {'User-Agent': 'xica369'}
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    """
+    Return the number of subscribers for a given subreddit.
 
+    Arguments:
+        subreddit: A string representing the subreddit name.
+
+    Returns:
+        The number of subscribers for the subreddit. If the subreddit
+        is invalid or if there's any error, returns 0.
+    """
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {"User-Agent": "MyUniqueAPI/1.0"}
+    response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
-        return (response.json().get("data").get("subscribers"))
-    return (0)
+        data = response.json()
+        subscribers = data['data']['subscribers']
+        return subscribers
+    else:
+        return 0
